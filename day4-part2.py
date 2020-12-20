@@ -44,17 +44,16 @@ for passport in passports:
     # set values to check
     byr, iyr, eyr, hgt, hcl, ecl, pid = passport.get('byr'), passport.get('iyr'), passport.get('eyr'), passport.get('hgt'), passport.get('hcl'), passport.get('ecl'), passport.get('pid')
     
-    # check for empty values
-    if None not in [byr, iyr, eyr, hgt, hcl, ecl, pid]:
-
+    # check for missing values
+    if ((None not in [byr, iyr, eyr, hgt, hcl, ecl, pid]) and
         # check for correct values
-        if ((len(byr) == 4 and 1920 <= int(byr) <= 2002) and # birth year
-            (len(iyr) == 4 and 2010 <= int(iyr) <= 2020) and # issue year
-            (len(eyr) == 4 and 2020 <= int(eyr) <= 2030) and # expiration year
-            (check_height(hgt)) and # height
-            (hcl[0] == '#' and len(hcl[1:]) == 6 and bool(re.match('^[#a-f0-9]*$', hcl))) and # hair color
-            (ecl in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']) and # eye color
-            (len(pid) == 9 and pid.isdigit())): # passport id
+        (len(byr) == 4 and 1920 <= int(byr) <= 2002) and # birth year
+        (len(iyr) == 4 and 2010 <= int(iyr) <= 2020) and # issue year
+        (len(eyr) == 4 and 2020 <= int(eyr) <= 2030) and # expiration year
+        (check_height(hgt)) and # height
+        (hcl[0] == '#' and len(hcl[1:]) == 6 and bool(re.match('^[#a-f0-9]*$', hcl))) and # hair color
+        (ecl in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']) and # eye color
+        (len(pid) == 9 and pid.isdigit())): # passport id
 
             # add to valid passports
             valid_passports += 1
