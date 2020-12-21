@@ -11,7 +11,7 @@ data.append('')
 # delete the line break('\n') from the data
 data = [x.replace('\n', '') for x in data]
 
-# dictionary to safe one passport
+# dictionary to save one passport
 passport = {}
 passports = []
 # construct passport as single dictionary from file and add to passports list
