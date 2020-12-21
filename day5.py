@@ -1,4 +1,4 @@
-# advent of code day 5
+# advent of code day 5 part 1 & 2
 
 # list of seats
 seats = []
@@ -23,8 +23,10 @@ def get_row_or_column(str, range):
         lower += int((upper - lower) / 2) + 1
         return get_row_or_column(str[1:], (lower, upper))
 
-# specify highest id
+# part 1: specify highest id
 max_id = 0
+# part 2: find my seat
+seat_ids = []
 
 for seat in seats:
     # first get the row number from 128 rows
@@ -35,6 +37,9 @@ for seat in seats:
     # calculate the id number
     id_number = row_number * 8 + col_number
 
+    # add to list to find my missing seat
+    seat_ids.append(id_number)
+
     # if id_number is bigger, then save as max id
     if (id_number > max_id):
         max_id = id_number
@@ -42,3 +47,13 @@ for seat in seats:
 
 # print the highest id for all boarding passes
 print('Highest ID number is:', max_id)
+
+# sort seat ids
+seat_ids.sort()
+
+# function to find missing id
+def find_missing(lst): 
+    return [x for x in range(lst[0], lst[-1]+1) if x not in lst]
+
+# print my seat id
+print('My seat has the ID:', find_missing(seat_ids))
