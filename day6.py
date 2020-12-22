@@ -24,7 +24,49 @@ for string in answers:
     for char in string:
         group_answers.add(char)
 
-answers = [groups for groups in answers if groups == '']
-print('max possible count:', len(answers) * 26)
 
-print('sum of answer counts:', answer_counter)
+print('sum of questions anyone answered yes:', answer_counter)
+
+# part 2: sum of questions everyone answered yes
+# count intersecting elements
+intersec_counter = 0
+set1 = set()
+set2 = set()
+
+test = ['xgwq', 'mohv', 'w', 'ertbzsjk', 'udf', '', 'abc', 'abc', 'abc', '']
+
+for string in answers:
+    # if string is empty add length to counter and reset sets
+    # next group starts
+    if string == '':
+        # don't add to counter if set contains dummy value
+        if set1 != {'0'}:
+            intersec_counter += len(set1)
+        # reset all sets
+        set1.clear()
+        set2.clear()
+
+    # fill set1 with data and use as intersection set
+    elif len(set1) == 0:
+        for char in string:
+            set1.add(char)
+
+    # fill set2 with every new line = form sheet
+    elif len(set2) == 0:
+        for char in string:
+            set2.add(char)
+
+    # if sets are full get the intersection
+    if len(set1) != 0 and len(set2) != 0:
+        set1 = set.intersection(set1, set2)
+        # dummy value if there is no intersection
+        # skips all following until next group
+        # because there can't be an intersection with 0
+        if len(set1) == 0:
+            set1.add('0')
+        set2.clear()
+        
+
+print('sum of questions everyone in the group answered with yes:', intersec_counter)
+
+    
