@@ -54,4 +54,5 @@ def find_solution2(numbers: list, target: int) -> int:
 
     return min(numbers[i:j]) + max(numbers[i:j])
 
-print('solution 2:', find_solution2(numbers, find_solution(numbers)))
+target = find_solution(numbers)
+print('solution 2:', find_solution2(numbers, target))
