@@ -14,7 +14,8 @@ with open(file, 'r') as file:
         number = int(line[:-1])
         numbers.append(number)
 
-# Part 1
+### Part 1 ###
+
 def find_solution(numbers: list) -> int:
     for i in range(25, len(numbers)):
         current = numbers[i]
@@ -33,3 +34,24 @@ def sum_is_possible(numbers: list, target: int) -> bool:
 
 # part 1 solution
 print('incorrect value:', find_solution(numbers))
+
+
+### Part 2 ###
+# i points to the beginning of the sequence
+# j points to the end of the sequence
+# while sequence not found move pointers
+def find_solution2(numbers: list, target: int) -> int:
+    i = 0
+    j = 1
+    sum_of_sequence = 0
+    
+    while sum_of_sequence != target:
+        if sum_of_sequence < target and j != len(numbers):
+            j += 1
+        else:
+            i += 1
+        sum_of_sequence = sum(numbers[i:j])
+
+    return min(numbers[i:j]) + max(numbers[i:j])
+
+print('solution 2:', find_solution2(numbers, find_solution(numbers)))
